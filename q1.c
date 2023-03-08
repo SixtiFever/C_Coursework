@@ -24,6 +24,8 @@ char* beginsWithConsonant(char*);
 
 int main() {
 
+    // free any memory used
+
     return 0;
 }
 
@@ -45,7 +47,6 @@ char* beginsWithVowel(char *word){
     for(i = 0, memPtr = word; *memPtr != '\0'; i++, memPtr++ ){
         result[i] = *memPtr;
     }
-   
     result[i++] = 'w';
     result[i++] = 'a';
     result[i] = 'y';
@@ -91,6 +92,8 @@ char* beginsWithConsonant(char *word){
             holding++;
         }
     }
+
+    free(holding[0]);
 
     /* append 'ay' */
     result[j] = 'a';
