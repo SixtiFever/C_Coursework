@@ -18,22 +18,16 @@
 
 */
 
+/* FUNCTIONAL PROTOTYPES */
 char *beginsWithVowel(char[]);
+char* beginsWithConsonant(char*);
 
 int main() {
-   
-    char word[N] = "anything";
-    printf("%p\n", &word);
-
-    char *result = beginsWithVowel(&word);
-   
-    
-   
-    printf("\n%s", result);
-   
 
     return 0;
 }
+
+/*********** FUNCTION DEFINITIONS ***********/
 
 /* BEGINS WITH A VOWEL */
 
@@ -59,5 +53,48 @@ char* beginsWithVowel(char *word){
 }
 
 /* BEGINS WITH A CONSONANT */
+/* pass in memory address of argument */
+char* beginsWithConsonant(char *word){
+    char *result, *holding, *ptr;
+    ptr = word; // pointer for operating on argument
+    
+    /* memory allocation to for holding and result arrays */
+     if( !( holding = (char*)malloc(sizeof(word)) + (2 * sizeof(char)) ) ){
+        printf("Memory allocation error");
+        exit(1);
+    }
+    if( !( result = (char*)malloc(sizeof(word)) + (2 * sizeof(char)) ) ){
+        printf("Memory allocation error");
+        exit(1);
+    }
+    
+    /* used to hold all consontants before a vowel */
+    int i = 0;
+    while(1){
+        if( *ptr == 'o' || *ptr == 'a' || *ptr == 'e' || *ptr == 'u' || *ptr == 'i' || *ptr == '\0' ) {
+            break;   
+        }
+        holding[i] = *ptr;
+        ptr++;
+        i++;
+    }
+    
+    /* create a new array to hold the result */
+    int j;
+    for( j = 0; j < N; j++ ){
+        if( *ptr != '\0'){
+            result[j] = *ptr;
+            ptr++;
+        } else {
+            if( *holding == '\0' ) break;
+            result[j] = *holding;
+            holding++;
+        }
+    }
 
-/* some comment */
+    /* append 'ay' */
+    result[j] = 'a';
+    result[++j] = 'y';
+    
+    return result;
+}
