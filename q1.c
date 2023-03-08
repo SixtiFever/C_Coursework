@@ -10,7 +10,7 @@
 /*  
 3 cases:
     1 - begins with consonants
-    2 - begins with a vowel
+    2 - begins with a vowel  -- DONE
     3 - begins with 'y'
 - if (begins with vowel) { do case 2 }
     else if (begins with 'y') { do case 3 }
@@ -60,3 +60,4 @@ char* beginsWithVowel(char *word){
 
 /* BEGINS WITH A CONSONANT */
 
+ssdasdadsada
