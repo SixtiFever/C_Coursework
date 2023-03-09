@@ -20,20 +20,41 @@
 
 /* FUNCTIONAL PROTOTYPES */
 char *beginsWithVowel(char[]);
-char* beginsWithConsonant(char*);
+char *beginsWithConsonant(char*);
+char *pig(char*);
 
 int main() {
 
-    // free any memory used
+    char arr[] = "eight";
+    char *r = pig(&arr);
+    
+    printf("%s", r);
+    
+    
 
     return 0;
 }
 
 /*********** FUNCTION DEFINITIONS ***********/
 
-/* BEGINS WITH A VOWEL */
+/* pig function */
+char *pig(char *word){
+    char *ptr = word;
+    /* if first letter is y */
+    if ( *ptr == 'y' ) {
+        char* result = beginsWithConsonant(word);
+        return result;
+    } else if ( *ptr == 'o' || *ptr == 'a' || *ptr == 'e' || *ptr == 'u' || *ptr == 'i' ) {
+        char* result = beginsWithVowel(word);
+        return result;
+    } else {
+        char* result = beginsWithConsonant(word);
+        return result;
+    }
+}
 
-/* pass in memory address of argument */
+/* BEGINS WITH A VOWEL */
+/* add 'way' to the end */
 char* beginsWithVowel(char *word){
     char *memPtr, *result; // hold memory for arry
     // assign memory + 3 char slots to append 'way'
@@ -78,6 +99,7 @@ char* beginsWithConsonant(char *word){
         holding[i] = *ptr;
         ptr++;
         i++;
+        if( *ptr == 'y' ) break;
     }
     
     /* create a new array to hold the result */
