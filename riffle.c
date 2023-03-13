@@ -2,35 +2,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 15
+#define N 7
 
 int main() {
-    int arr[N] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+    /* original array */
+    int arr[N] = {11,18,16,12,8,13,21};
+    /* work array */
+    int *work = malloc(sizeof(int) * N);
     
-    /* if original array is odd, +1 index to array B */
+    /* setting half arrays */
+    // if odd N
     if(N%2!=0){
         int *a = malloc((N/2)*sizeof(int));
-        int *b = malloc((N/2)+1*sizeof(int));
-        /* work array */
-        int *work = malloc(sizeof(int) * N);
+        int *b = malloc(((N/2)+1)*sizeof(int));
         
-        /* memcopys to populate arrays */
-        memcpy(a, arr, sizeof(N/2)); // copy from arr into a, the first N/2 integers
-        memcpy(b, arr+(N/2), sizeof(N/2)+1); // copy from arr + (int)N/2+1 bytes to b the remaining integers
-        
-       /* I now have arrays A and B, containing the elements of the original array */
+        memcpy(a, arr, sizeof(int) * (N/2));
+        memcpy(b, arr+(N/2), ((N/2)+1)*sizeof(int));
        
-       /* next, randomly select one of the arrays to obtain the head, and append
-       to the work array. Then repeat this */
+       int i = 0;
+       int aCounter = 0;
+       int bCounter = 0;
+       int picker;
+       
+       while(1){
+           /* if b and a reach index limits, break */
+           if(bCounter == (N/2)+1 && aCounter == N/2) break;
+           
+           picker = rand()%2;
+           if ( picker == 1){
+               if(aCounter == N/2) continue;
+               printf("a counter: %d\n", aCounter);
+               work[i] = a[aCounter++];
+               } else {
+                if(bCounter == (N/2)+1) continue;
+                printf("b counter: %d\n", bCounter);
+                work[i] = b[bCounter++];
+           }
+           i++;
+       }
+      
+      int j;
+      for( j = 0; j < N; j++ ){
+          printf("%d\n", work[j]);
+      }
         
         free(a);
         free(b);
+        free(work);
     }
     /* if original array is odd, +1 index to array B */
     else {
         int a[N/2], b[N/2];
     }
-    
     
     return 0;
 }
